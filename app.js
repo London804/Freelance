@@ -3,33 +3,38 @@
  */
 var express = require('express');
 var app = express();
+var routes = require('./routes');
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res){
-   res.render('default', {
-       title: 'Home',
-       classname: 'home',
-       users: ['Alex', 'Brandon', 'Vanessa']
-   });
-});
+app.locals.pagetitle = '';
 
-app.get('/portfolio', function(req, res){
-    res.render('default', {
-        title: 'Portfolio',
-        classname: 'portfolio'
-    });
-});
-app.get('/contact', function(req, res){
-    res.render('default', {
-        title: 'Contact',
-        classname: contact
-    });
-});
+//app.get('/', function(req, res){
+//   res.render('default', {
+//       title: 'Home',
+//       classname: 'home',
+//       users: ['Alex', 'Brandon', 'Vanessa']
+//   });
+//});
+//
+//app.get('/portfolio', function(req, res){
+//    res.render('default', {
+//        title: 'Portfolio',
+//        classname: 'portfolio'
+//    });
+//});
+//app.get('/contact', function(req, res){
+//    res.render('default', {
+//        title: 'Contact',
+//        classname: contact
+//    });
+//});
 
-app.get('/me', function(req, res){
-   res.send('@London804');
-});
+app.use(express.static('public'));
+
+app.get('/', routes.index);
+app.get('/portfolio', routes.portfolio);
+app.get('/contact', routes.contact);
 
 app.get('*', function(req, res){
    res.send('Bad Route');

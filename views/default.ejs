@@ -31,27 +31,31 @@
 
     <section class="row">
         <div class="col-sm-3">
-            <img class="img-responsive" src="/assets/img/pin-1.jpg">
+            <img class="img-responsive" src="./img/pin-1.jpg">
         </div>
         <div class="col-sm-3">
-            <img class="img-responsive" src="/assets/img/pin-1.jpg">
+            <img class="img-responsive" src="./img/pin-1.jpg">
         </div>
         <div class="col-sm-3">
-            <img class="img-responsive" src="/assets/img/pin-1.jpg">
+            <img class="img-responsive" src="./img/pin-1.jpg">
         </div>
         <div class="col-sm-3">
-            <img class="img-responsive" src="/assets/img/pin-1.jpg">
+            <img class="img-responsive" src="./img/pin-1.jpg">
         </div>
     </section>
     <section class="row">
         <div class="col-sm-12">
-            <!--<ul>-->
-                <!--<% for( var i = 0; i<users.length; i++) { %>-->
-                <!--<li><%= users[i]%></li>-->
+            <% if (typeof(users) !=='undefined'){ %>
+            <ul>
+                <% for( var i = 0; i<users.length; i++) { %>
+                <li><%= users[i]%></li>
 
-                <!--<%}%>-->
+                <%}%>
 
-            <!--</ul>-->
+            </ul>
+
+            <%}%>
+
         </div>
     </section>
 
