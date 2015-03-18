@@ -7,8 +7,8 @@ module.exports = function(grunt) {
 
         copy: {
             dist: {
-                src: 'assets/js/<%= pkg.name %>.js',
-                dest: 'assets/js/scripts<%= grunt.template.today("yyyy-mm-dd") %>.js'
+                src: 'public/js/<%= pkg.name %>.js',
+                dest: 'public/js/scripts<%= grunt.template.today("yyyy-mm-dd") %>.js'
             }
         },
 
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
         //min files
         uglify: {
             build: {
-                src: ['assets/js/scripts.js'], //input
-                dest: 'assets/js/build/scripts.min.js' //output
+                src: ['public/js/scripts.js'], //input
+                dest: 'public/js/build/scripts.min.js' //output
             }
         },
 
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                     compass: true
                 },
                 files: {
-                    "assets/css/stylesDevelopment.css": "assets/Sass/styles.scss"
+                    "public/css/stylesDevelopment.css": "public/Sass/styles.scss"
                 }
             },
             production: {
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                     compass: true
                 },
                 files: {   //only actually need this bit inside less everything else is if you were creating a different environment for development and production
-                    "assets/css/build/styles.css": "assets/Sass/styles.scss"
+                    "public/css/build/styles.css": "public/Sass/styles.scss"
                 }
             }
         },
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
         //    }
         //},
         jshint: {
-            beforeconcat: ['assets/js/scripts.js'] //it appears there are a few ways to write this but I think this one works fine.
+            beforeconcat: ['public/js/scripts.js'] //it appears there are a few ways to write this but I think this one works fine.
         },
         //watch
         watch: {
@@ -87,13 +87,13 @@ module.exports = function(grunt) {
                 files: ['index.html']
             },
             css: {
-                files: 'assets/sass/*.scss',
+                files: 'public/sass/*.scss',
                 tasks: ['sass'],
                 livereload: true
 
             },
             js: {
-                   files: ['assets/js/*.js'],
+                   files: ['public/js/*.js'],
                tasks: ['jshint', 'concat', 'uglify'],
                 options: {
                   spawn: false
