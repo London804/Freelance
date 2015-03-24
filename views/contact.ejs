@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%include partials/pages/head.ejs%>
+</head>
+<body class="<%= classname %>">
+<section class="container">
+    <section class="row">
+        <div class="col-sm-7">
+            <form name="contact-form" id="contact-form" class="contact-form clear-fix" target="uploader_iframe">
+
+                <div class="clear-fix">
+
+                    <ul class="list-0 clear-fix">
+
+                        <li>
+                            <div class="block field-box">
+                                <label for="contact-form-name">Your Name</label>
+                                <input type="text" name="contact-form-name" id="contact-form-name" value=""/>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="block field-box">
+                                <label for="contact-form-mail">Your E-mail</label>
+                                <input type="text" name="contact-form-mail" id="contact-form-mail" value=""/>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="block field-box">
+                                <label for="contact-form-message">Your message</label>
+                                <textarea name="contact-form-message" id="contact-form-message" rows="1" cols="1"></textarea>
+                            </div>
+                        </li>
+                        <div id="captchaHolder">
+                            {% autoescape false %} {{captcha}} {% endautoescape %}
+                        </div>
+
+                        <h5 id="submitResponse"></h5>
+
+                        <li>
+                            <div class="block field-box field-box-button">
+                                <input type="submit" id="contact-form-submit" name="contact-form-submit" class="button" value="Submit"/>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-5">
+            <div id="map-canvas">
+
+            </div>
+        </div>
+    </section>
+</section>
+
+
+    <%include partials/pages/jsdefaults.ejs%>
+</body>
+</html>

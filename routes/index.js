@@ -13,7 +13,7 @@ exports.portfolio = function(req, res){
     });
 };
 exports.contact = function(req, res){
-    res.render('default', {
+    res.render('contact', {
         title: 'Contact',
         classname: 'contact'
     });
