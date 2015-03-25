@@ -6834,6 +6834,10 @@ body {
 .field-box {
   margin: 10px auto;
 }
+.field-box i {
+  font-family: 'Glyphicons Halflings';
+  content: "\e082";
+}
 .field-box textarea {
   resize: none;
   width: 97.5%;
