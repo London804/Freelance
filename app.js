@@ -45,18 +45,18 @@ app.get('*', function(req, res){
 var server = app.listen(3000, function(){
    console.log('listening on port 3000');
 
-   //Require the sweetcaptcha module and give it the credentials you were sent upon registration.
-   var sweetcaptcha = new require('sweetcaptcha')(235723, '5d0150912bd74d200ef71f6cc5bb7c7b', '307af2781e22575d1bd08b6d171084d3');
-
-// The page that your contact form is on should have a route like this
-   app.get('/', function(req, res){
-
-      //get sweetcaptcha html for the contact area
-      sweetcaptcha.api('get_html', function(err,html){
-         //Send the guts of the captcha to your template
-         res.render('contact', { captcha : html });
-      });
-
-   });
+//   //Require the sweetcaptcha module and give it the credentials you were sent upon registration.
+//   var sweetcaptcha = new require('sweetcaptcha')(235723, '5d0150912bd74d200ef71f6cc5bb7c7b', '307af2781e22575d1bd08b6d171084d3');
+//
+//// The page that your contact form is on should have a route like this
+//   app.get('/', function(req, res){
+//
+//      //get sweetcaptcha html for the contact area
+//      sweetcaptcha.api('get_html', function(err,html){
+//         //Send the guts of the captcha to your template
+//         res.render('contact', { captcha : html });
+//      });
+//
+//   });
 
 });
