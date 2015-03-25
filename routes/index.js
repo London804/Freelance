@@ -23,5 +23,41 @@ exports.contact = function(req, res){
         });
     });
 
+    //Validate captcha
+    sweetcaptcha.api('check', {sckey: req.body["sckey"], scvalue: req.body["scvalue"]}, function(err, response){
+        if (err) return console.log(err);
+
+        if (response === 'true') {
+            // valid captcha
+
+            // setup e-mail data with unicode symbols
+            var mailOptions = {
+                from: 'Alex <london804i@gmail.com>', // sender address
+                to: 'alexechaparro@gmail.com', // list of receivers. This is whoever you want to get the email when someone hits submit
+                subject: 'New email from your website contact form', // Subject line
+                text: req.body["contact-form-message"] + ' You may contact this sender at: ' + req.body["contact-form-mail"] // plaintext body
+
+            };
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Message sent: ' + info.response);
+                }
+            });
+            //Success
+            res.send("Thanks! We have sent your message.");
+
+        }
+        if (response === 'false'){
+            // invalid captcha
+            console.log("Invalid Captcha");
+            res.send("Try again");
+
+        }
+    });
+
 
 };

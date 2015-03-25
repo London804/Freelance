@@ -40,6 +40,17 @@ app.get('*', function(req, res){
    res.send('Bad Route');
 });
 
+//Require the module
+var nodemailer = require('nodemailer');
+
+//Create the reusable transport
+var transporter = nodemailer.createTransport({
+   service: 'Gmail',
+   auth: {
+      user: 'london804i@gmail.com',
+      pass: 'myPassWord' //remember to change whenever pushing
+   }
+});
 
 
 var server = app.listen(3000, function(){
