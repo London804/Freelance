@@ -4,6 +4,13 @@
 var express = require('express');
 var app = express();
 var routes = require('./routes');
+var bodyParser = require('body-parser');
+
+var server = app.listen(3000, function(){
+   console.log('listening on port 3000');
+
+
+});
 
 app.set('view engine', 'ejs');
 
@@ -31,7 +38,7 @@ app.locals.pagetitle = '';
 //});
 
 app.use(express.static('public'));
-
+app.use(bodyParser.raw());
 app.get('/', routes.index);
 app.get('/portfolio', routes.portfolio);
 app.get('/contact', routes.contact);
@@ -48,26 +55,55 @@ var transporter = nodemailer.createTransport({
    service: 'Gmail',
    auth: {
       user: 'london804i@gmail.com',
-      pass: 'myPassWord' //remember to change whenever pushing
+      pass: 'myPassword'
    }
 });
 
+//Create the route that does all the magic when your contact form submit button is pressed
 
-var server = app.listen(3000, function(){
-   console.log('listening on port 3000');
+app.post('/contact', function(req, res) {
+   var sweetcaptcha = new require('sweetcaptcha')(appId, appKey, appSecret);
 
-//   //Require the sweetcaptcha module and give it the credentials you were sent upon registration.
-//   var sweetcaptcha = new require('sweetcaptcha')(235723, '5d0150912bd74d200ef71f6cc5bb7c7b', '307af2781e22575d1bd08b6d171084d3');
-//
-//// The page that your contact form is on should have a route like this
-//   app.get('/', function(req, res){
-//
-//      //get sweetcaptcha html for the contact area
-//      sweetcaptcha.api('get_html', function(err,html){
-//         //Send the guts of the captcha to your template
-//         res.render('contact', { captcha : html });
-//      });
-//
-//   });
+
+   console.log( req.body, req.params );
+
+   //Validate captcha
+   sweetcaptcha.api('check', {sckey: req.body["sckey"], scvalue: req.body["scvalue"]}, function(err, response){
+      if (err) return console.log(err);
+
+      if (response === 'true') {
+         // valid captcha
+
+         // setup e-mail data with unicode symbols
+         var mailOptions = {
+            from: 'Alex <london804i@gmail.com>', // sender address
+            to: 'alexechaparro@gmail.com', // list of receivers. This is whoever you want to get the email when someone hits submit
+            subject: 'New email from your website contact form', // Subject line
+            text: req.body["contact-form-message"] + ' You may contact this sender at: ' + req.body["contact-form-mail"] // plaintext body
+
+         };
+
+         // send mail with defined transport object
+         transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+               console.log(error);
+            } else {
+               console.log('Message sent: ' + info.response);
+            }
+         });
+         //Success
+         res.send("Thanks! We have sent your message.");
+
+      }
+      if (response === 'false'){
+         // invalid captcha
+         console.log("Invalid Captcha");
+         res.send("Try again");
+
+      }
+   });
 
 });
+
+
+

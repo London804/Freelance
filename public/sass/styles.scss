@@ -28,6 +28,35 @@ body {
     min-height: 450px;
 }
 
+.list-0 {
+    list-style: none;
+    #one, #two {
+        width: 50%;
+        float: left;
+        div {
+            display: inline-block;
+            width: 100%;
+            input {
+                width: 95%;
+                border: 2px solid #eeeeee;
+            }
+        }
+    }
+}
+
+.field-box {
+    margin: 10px auto;
+    textarea {
+        resize: none;
+        width: 97.5%;
+        height: 50px;
+        border: 2px solid #eeeeee;
+    }
+}
+
+#captchaHolder {
+    margin-top: 20px;
+}
 
 @media (min-width: $screen-sm-min) {
     html {

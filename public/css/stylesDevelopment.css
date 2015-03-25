@@ -6815,6 +6815,36 @@ body {
   min-height: 450px;
 }
 
+.list-0 {
+  list-style: none;
+}
+.list-0 #one, .list-0 #two {
+  width: 50%;
+  float: left;
+}
+.list-0 #one div, .list-0 #two div {
+  display: inline-block;
+  width: 100%;
+}
+.list-0 #one div input, .list-0 #two div input {
+  width: 95%;
+  border: 2px solid #eeeeee;
+}
+
+.field-box {
+  margin: 10px auto;
+}
+.field-box textarea {
+  resize: none;
+  width: 97.5%;
+  height: 50px;
+  border: 2px solid #eeeeee;
+}
+
+#captchaHolder {
+  margin-top: 20px;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
